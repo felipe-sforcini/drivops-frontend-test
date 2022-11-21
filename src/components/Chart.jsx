@@ -20,6 +20,8 @@ export default function Chart() {
         'Pessoa2',
     ]);
 
+    // const [options, setOptions] = useState({});
+
     const [options, setOptions] = useState({});
 
     const [sellers, setSellers] = useState([]);
@@ -28,7 +30,9 @@ export default function Chart() {
         try {
             const response = await api.get('/dashboards/sales-by-sellers');
             const sellers = await response.data;
+            console.log('entrou em loadsellers');
             setSellers(sellers);
+            console.log('do loadSellers:', sellers);
             xCategories();
         } catch (error) {
             throw error
@@ -36,17 +40,31 @@ export default function Chart() {
     }
 
     async function xCategories() {
-        const localCategories = [...categories];
+        const localCategories = categories;
+        const localSellers = sellers;
 
-        sellers.map(seller => {
-            localCategories.push(seller.nome_vendedor);
-        })
-        await setCategories(localCategories);
+        await mapingSellers(localCategories, localSellers);
+
+        console.log('do xcategories', localCategories);
         console.log(categories);
         handleOptions();
     }
 
+    async function mapingSellers(localCategories, localSellers) {
+        try {
+            await localSellers.map(seller => {
+                // localCategories.push(seller.nome_vendedor);
+                setCategories([...localCategories, seller.nome_vendedor]);
+                console.log('entrou em mapingSellers');
+            })
+        } catch (error) {
+            throw error
+        }
+        setCategories(localCategories);
+    }
+
     function handleOptions() {
+        console.log('entrou no handleOptions');
         setOptions({
             chart: {
                 height: 350,
@@ -80,10 +98,12 @@ export default function Chart() {
                 }
             }
         });
+        console.log('setou os options');
     }
 
     useEffect(() => {
         loadSellers();
+        console.log('iniciou loadsellers');
     }, [])
 
     // const options = {
