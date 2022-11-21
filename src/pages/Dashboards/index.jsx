@@ -2,7 +2,8 @@ import Chart from '../../components/Chart';
 import Sidebar from '../../components/Sidebar';
 import './styles.scss';
 
-export default function Example() {
+export default function Dashboards() {
+
     return (
         <div className='dashboards__page'>
             <Sidebar />
