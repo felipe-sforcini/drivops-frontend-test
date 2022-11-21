@@ -36,17 +36,17 @@ export default function Chart() {
     }
 
     async function xCategories() {
-        const localCategories = await [...categories];
+        const localCategories = [...categories];
 
         sellers.map(seller => {
             localCategories.push(seller.nome_vendedor);
         })
-        setCategories(localCategories);
+        await setCategories(localCategories);
         console.log(categories);
         handleOptions();
     }
 
-    async function handleOptions() {
+    function handleOptions() {
         setOptions({
             chart: {
                 height: 350,
