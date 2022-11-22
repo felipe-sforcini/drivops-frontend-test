@@ -1,4 +1,4 @@
-import Chart from '../../components/Chart';
+import SalesBySellers from '../../components/SalesBySellers';
 import Sidebar from '../../components/Sidebar';
 import './styles.scss';
 
@@ -9,7 +9,7 @@ export default function Dashboards() {
             <Sidebar />
             <div className="dashboards">
                 <strong>Vendas Totais por vendedor</strong>
-                <Chart />
+                <SalesBySellers />
             </div>
         </div>
     )
